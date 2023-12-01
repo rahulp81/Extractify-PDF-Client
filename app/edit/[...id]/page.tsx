@@ -45,8 +45,7 @@ function Page1({ params }: { params: { id: string } }) {
   useEffect(() => {
     const fetchPdf = async () => {
       try {
-        const response = await fetch(process.env.DOMAIN ? `${process.env.DOMAIN}/edit/${params.id}` :
-          `http://localhost:3001/edit/${params.id}`);
+        const response = await fetch(`https://extractify-pdf-server-production.up.railway.app/${params.id}`);
         if (!response.ok) {
           setError(true)
           return
@@ -162,7 +161,7 @@ function Page1({ params }: { params: { id: string } }) {
   async function handleFileExtract() {
     try {
       setExtracting({ intiated: true, hasLoaded: false, error: false });
-      const res = await fetch(process.env.DOMAIN ?  `${process.env.DOMAIN}/extract${params.id}` : `http://localhost:3001/extract/${params.id}`, {
+      const res = await fetch(`https://extractify-pdf-server-production.up.railway.app/${params.id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

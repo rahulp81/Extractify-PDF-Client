@@ -15,8 +15,6 @@ const Form = () => {
 
     const router = useRouter();
 
-    console.log('Backend Domain:-',process.env.DOMAIN)
-
     const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFiles = Array.from(e.target.files as FileList);
         if (selectedFiles.length > 1) {
@@ -48,10 +46,10 @@ const Form = () => {
                 return;
             }
 
+            // Update api to use local host link when running locally
             const formData = new FormData();
             formData.append('pdfFile', selectedFile);
-            const res = await fetch(process.env.DOMAIN ? `${process.env.DOMAIN}/upload` :
-            'http://localhost:3001/upload', {
+            const res = await fetch('https://extractify-pdf-server-production.up.railway.app/upload', {
                 method: 'POST',
                 body: formData,
             });
