@@ -45,7 +45,8 @@ function Page1({ params }: { params: { id: string } }) {
   useEffect(() => {
     const fetchPdf = async () => {
       try {
-        const response = await fetch(process.env.FETCH_PDF_API || `http://localhost:3001/edit/${params.id}`);
+        const response = await fetch(process.env.DOMAIN ? `${process.env.DOMAIN}/edit/${params.id}` :
+          `http://localhost:3001/edit/${params.id}`);
         if (!response.ok) {
           setError(true)
           return
@@ -161,7 +162,7 @@ function Page1({ params }: { params: { id: string } }) {
   async function handleFileExtract() {
     try {
       setExtracting({ intiated: true, hasLoaded: false, error: false });
-      const res = await fetch(process.env.EXTRACT_PDF_API || `http://localhost:3001/extract/${params.id}`, {
+      const res = await fetch(process.env.DOMAIN ?  `${process.env.DOMAIN}/extract${params.id}` : `http://localhost:3001/extract/${params.id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -223,7 +224,7 @@ function Page1({ params }: { params: { id: string } }) {
               </TooltipProvider>
             }
           </div>
-          <Page  pageNumber={i} width={192} height={150} className={''} renderTextLayer={false} />
+          <Page pageNumber={i} width={192} height={150} className={''} renderTextLayer={false} />
           <span className={`font-mono max-w-fit py-1.5 px-3 text-sm ${isSelectedPage ? 'bg-green-400' : 'bg-slate-200'} rounded-md`}>
             Page : {i}</span>
         </div>

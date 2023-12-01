@@ -49,7 +49,8 @@ const Form = () => {
 
             const formData = new FormData();
             formData.append('pdfFile', selectedFile);
-            const res = await fetch(process.env.UPLOAD_API || 'http://localhost:3001/upload', {
+            const res = await fetch(process.env.DOMAIN ? `${process.env.DOMAIN}/upload` :
+            'http://localhost:3001/upload', {
                 method: 'POST',
                 body: formData,
             });
