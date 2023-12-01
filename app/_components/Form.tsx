@@ -15,6 +15,7 @@ const Form = () => {
 
     const router = useRouter();
 
+    console.log('Backend Domain:-',process.env.DOMAIN)
 
     const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFiles = Array.from(e.target.files as FileList);
