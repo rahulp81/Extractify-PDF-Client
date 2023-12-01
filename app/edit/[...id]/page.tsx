@@ -45,7 +45,7 @@ function Page1({ params }: { params: { id: string } }) {
   useEffect(() => {
     const fetchPdf = async () => {
       try {
-        const response = await fetch(`https://extractify-pdf-server-production.up.railway.app/${params.id}`);
+        const response = await fetch(`https://extractify-pdf-server-production.up.railway.app/edit/${params.id}`);
         if (!response.ok) {
           setError(true)
           return
@@ -161,7 +161,7 @@ function Page1({ params }: { params: { id: string } }) {
   async function handleFileExtract() {
     try {
       setExtracting({ intiated: true, hasLoaded: false, error: false });
-      const res = await fetch(`https://extractify-pdf-server-production.up.railway.app/${params.id}`, {
+      const res = await fetch(`https://extractify-pdf-server-production.up.railway.app/extract/${params.id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
